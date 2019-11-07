@@ -11,7 +11,7 @@ public class SharedScore extends AndroidViewModel {
 
     private MutableLiveData<Integer> scoreHome;
     private MutableLiveData<Integer> scoreVisitor;
-    private MutableLiveData<Boolean> winner;
+    private MutableLiveData<Integer> winner;
 
     public SharedScore(@NonNull Application application) {
         super(application);
@@ -36,11 +36,11 @@ public class SharedScore extends AndroidViewModel {
         return scoreVisitor;
     }
 
-    public void setWinner(Boolean result){
+    public void setWinner(Integer result){
         winner.setValue(result);
     }
 
-    public LiveData<Boolean> getWinner(){
+    public LiveData<Integer> getWinner(){
         return winner;
     }
 }

@@ -57,7 +57,10 @@ public class WinnerFragment extends Fragment {
 			public void onChanged(Integer score) {
 				scoreVisitor = score;
 				if(scoreVisitor > scoreHome){
-					sharedScore.setWinner(false);
+					sharedScore.setWinner(2);
+				}
+				else if(scoreVisitor == scoreHome){
+					sharedScore.setWinner(3);
 				}
 			}
 		});
@@ -67,18 +70,24 @@ public class WinnerFragment extends Fragment {
 			public void onChanged(Integer score) {
 				scoreHome = score;
 				if(scoreVisitor < scoreHome){
-					sharedScore.setWinner(true);
+					sharedScore.setWinner(1);
+				}
+				else if(scoreVisitor == scoreHome){
+					sharedScore.setWinner(3);
 				}
 			}
 		});
 
-		sharedScore.getWinner().observe(requireActivity(), new Observer<Boolean>() {
+		sharedScore.getWinner().observe(requireActivity(), new Observer<Integer>() {
 			@Override
-			public void onChanged(Boolean winner) {
-				if(winner){
+			public void onChanged(Integer winner) {
+				if(winner == 1){
 					txtWinner.setText("Home WIN");
-				}else{
+				}else if(winner == 2){
 					txtWinner.setText("Visitor WIN");
+				}
+				else {
+					txtWinner.setText("Score Draw");
 				}
 			}
 		});
